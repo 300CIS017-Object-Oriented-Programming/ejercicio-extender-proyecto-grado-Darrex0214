@@ -26,8 +26,10 @@ def agregar_acta(st, controlador):
         info_acta_obj.codirector = st.text_input("Codirector", "N.A")
     with col7:
         info_acta_obj.jurado1 = st.text_input("Jurado #1")
+        info_acta_obj.jurado1_tipo = st.checkbox("Externo", key="check1")
     with col8:
         info_acta_obj.jurado2 = st.text_input("Jurado #2")
+        info_acta_obj.jurado2_tipo = st.checkbox("Externo", key="check2")
     with col9:
         info_acta_obj.fecha_presentacion = st.text_input("Fecha de Presentacion")
     enviado_btn = st.button("Enviar")
