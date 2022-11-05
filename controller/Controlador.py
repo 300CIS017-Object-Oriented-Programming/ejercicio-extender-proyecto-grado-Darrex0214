@@ -82,4 +82,9 @@ class Controlador:
         palabra = primero + " punto " + segundo
         return palabra
 
+    def directores(self):
+        directores = ["Luisa Fernanda Rincon", "Juan Carlos Martinez", "Maria Constanza Pabon", "Gloria Inés Álvarez",
+                      "Gerardo M Sarria M", "Luis Eduardo Tobón", "Juan Pablo García", "Frank Martinez",
+                      "Carlos Ramirez"]
 
+        return directores

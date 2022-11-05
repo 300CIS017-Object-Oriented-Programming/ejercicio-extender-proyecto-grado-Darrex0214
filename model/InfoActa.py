@@ -24,3 +24,4 @@ class InfoActa:
         self.nota_final = 0.0
         self.criterios = criterios
         self.estado = False
+
