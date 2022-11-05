@@ -38,6 +38,7 @@ class ControladorPdf:
                 self.pdf.cell(200, 10, txt=f"Tipo De Trabajo:               {acta.tipo_trabajo}", ln=1, align='L')
                 self.pdf.cell(200, 10, txt=f"Jurado 1:                            {acta.jurado1}", ln=1, align='L')
                 self.pdf.cell(200, 10, txt=f"Jurado 2:                            {acta.jurado2}", ln=1, align='L')
+                self.pdf.cell(200, 10, txt=f"Fecha de Presentacion:                  {acta.fecha_presentacion}", ln=1, align='L')
                 self.pdf.multi_cell(185, 6,
                                txt="En atención al desarrollo de este Trabajo de Grado y al documento y sustentación que presentó el(la) autor(a), los Jurados damos las siguientes calificaciones parciales y observaciones (los criterios a evaluar y sus ponderaciones se estipulan en el artículo 7.1 de las Directrices para Trabajo de Grado de Maestría):",
                                align='L')
