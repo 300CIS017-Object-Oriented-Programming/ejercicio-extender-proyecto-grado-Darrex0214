@@ -26,10 +26,10 @@ def agregar_acta(st, controlador):
         info_acta_obj.codirector = st.text_input("Codirector", "N.A")
     with col7:
         info_acta_obj.jurado1 = st.text_input("Jurado #1")
-        info_acta_obj.jurado1_tipo = st.checkbox("Externo", key="check1")
+        info_acta_obj.jurado1_1 = st.checkbox("Externo", key="check1")
     with col8:
         info_acta_obj.jurado2 = st.text_input("Jurado #2")
-        info_acta_obj.jurado2_tipo = st.checkbox("Externo", key="check2")
+        info_acta_obj.jurado2_2 = st.checkbox("Externo", key="check2")
     with col9:
         info_acta_obj.fecha_presentacion = st.text_input("Fecha de Presentacion")
     enviado_btn = st.button("Enviar")
@@ -39,6 +39,16 @@ def agregar_acta(st, controlador):
             and info_acta_obj.jurado1 != "" and info_acta_obj.jurado2 != "":
         controlador.agregar_evaluacion(info_acta_obj)
         st.success("Acta Agregada Exitosamente.")
+
+        if info_acta_obj.tipo_trabajo == 'Aplicado':
+            controlador.proyectos_aplicados += 1
+        else:
+            controlador.proyectos_investigacion += 1
+        if info_acta_obj.jurado1_1 == False or info_acta_obj.jurado2_2 == False:
+            controlador.jurados_externos += 1
+        if info_acta_obj.jurado1_1 == True or info_acta_obj.jurado2_2 == True:
+            controlador.jurados_internos += 1
+
     elif enviado_btn:
         st.error("Llene Todos Los Campos Vacíos.")
     else:
@@ -123,8 +133,11 @@ def evaluar_criterios(st, controlador):
                 criterio.observacion = st.text_input(str(num) + ". Observación", "Sin Comentarios.")
                 temp += criterio.nota
                 num += 1
+
             if temp > 3.5:
                 st.write("#### Nota Final", temp, "Acta Aprobada.")
+                if temp > 4.8:
+                    controlador.proyectos_mayor_48 += 1
             else:
                 st.write("#### Nota Final", temp, "Acta Reprobada.")
 
@@ -166,3 +179,12 @@ def exportar_acta(st, controlador):
 
     if len(controlador.actas) == 0:
         st.warning("No Hay Ningún Estudiante Calificado Actualmente.")
+
+def estadisticas(st, controlador):
+    st.title("Estádisticas generales")
+
+    st.metric("Proyectos de Aplicacion", value=controlador.proyectos_aplicados)
+    st.metric("Proyectos de Investigación", value=controlador.proyectos_investigacion)
+    st.metric("Proyectos con Jurados Externos", value=controlador.jurados_externos)
+    st.metric("Proyectos con Jurados Internos", value=controlador.proyectos_aplicados)
+    st.metric("Proyectos Superiores a 4.8", value=controlador.proyectos_mayor_48)

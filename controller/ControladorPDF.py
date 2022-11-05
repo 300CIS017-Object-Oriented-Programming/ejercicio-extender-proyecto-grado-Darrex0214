@@ -89,8 +89,8 @@ class ControladorPdf:
                                align='L')
                 self.pdf.cell(200, 30, txt="________________________________   ________________________________", ln=2,
                          align='C')
-                self.pdf.cell(200, 5, txt="Firma Jurado 1                                      Firma Jurado 2 ", ln=2,
-                         align='C')
+                self.pdf.cell(200, 5, txt=f"{acta.jurado1}                                  {acta.jurado2} ", ln=2,
+                              align='C')
 
         if [acta.autor for acta in controlador.actas if acta.estado and flag]:
             self.pdf_nombre = f"outputs/Acta_{acta_seleccionada}.self.pdf"
