@@ -89,7 +89,7 @@ class ControladorPdf:
                                align='L')
                 self.pdf.cell(200, 30, txt="________________________________   ________________________________", ln=2,
                          align='C')
-                self.pdf.cell(200, 5, txt=f"{acta.jurado1}                                  {acta.jurado2} ", ln=2,
+                self.pdf.cell(200, 5, txt=f" Firma {acta.jurado1}                                 Firma {acta.jurado2} ", ln=2,
                               align='C')
 
         if [acta.autor for acta in controlador.actas if acta.estado and flag]:

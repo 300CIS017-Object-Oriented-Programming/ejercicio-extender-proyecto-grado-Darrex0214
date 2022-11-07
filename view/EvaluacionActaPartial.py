@@ -1,5 +1,6 @@
 import os
 
+import plotly.graph_objects as go
 from model.InfoActa import InfoActa
 from datetime import datetime
 from controller.ControladorPDF import ControladorPdf
@@ -133,7 +134,9 @@ def evaluar_criterios(st, controlador):
                 criterio.observacion = st.text_input(str(num) + ". Observación", "Sin Comentarios.")
                 temp += criterio.nota
                 num += 1
-
+            criterio.observacion_adicional = st.text_input(str(num) + ". Observacion adicional", "Sin Comentarios.")
+            num += 1
+            criterio.restriccion = st.text_input(str(num) + ". Restriccion", "Sin Comentarios.")
             if temp > 3.5:
                 st.write("#### Nota Final", temp, "Acta Aprobada.")
                 if temp > 4.8:
@@ -186,5 +189,13 @@ def estadisticas(st, controlador):
     st.metric("Proyectos de Aplicacion", value=controlador.proyectos_aplicados)
     st.metric("Proyectos de Investigación", value=controlador.proyectos_investigacion)
     st.metric("Proyectos con Jurados Externos", value=controlador.jurados_externos)
-    st.metric("Proyectos con Jurados Internos", value=controlador.proyectos_aplicados)
+    st.metric("Proyectos con Jurados Internos", value=controlador.jurados_internos)
     st.metric("Proyectos Superiores a 4.8", value=controlador.proyectos_mayor_48)
+
+    st.title("Estádisticas con Plotly")
+
+    labels = ['Proyectos de Aplicacion', 'Proyectos de Investigación', 'Proyectos con Jurados Externos', 'Proyectos con Jurados Internos', 'Proyectos Superiores a 4.8' ]
+    values = [controlador.proyectos_aplicados, controlador.proyectos_investigacion, controlador.jurados_externos, controlador.jurados_internos, controlador.proyectos_mayor_48]
+
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    st.plotly_chart(fig, use_container_width=True)

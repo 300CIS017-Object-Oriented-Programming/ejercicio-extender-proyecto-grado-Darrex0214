@@ -5,7 +5,6 @@ Asignatura: POO
 """
 
 import streamlit as st
-
 from streamlit_option_menu import option_menu
 from controller.Controlador import Controlador
 from view.EvaluacionActaPartial import ver_historico_acta, agregar_acta, evaluar_criterios, exportar_acta, estadisticas
